@@ -1,0 +1,9 @@
+.text{
+    font-family: 'Open Sans', sans-serif;
+    color: dodgerblue;
+    font-weight: bold;
+}
+.textError{
+    font-family: 'Open Sans', sans-serif;
+    color: red;
+}

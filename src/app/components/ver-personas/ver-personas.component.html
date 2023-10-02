@@ -1,0 +1,65 @@
+<div align = "center">
+    <div class="card">
+        <h4 class="card-header">Personas</h4>
+    </div>
+
+    <br> 
+
+    <div *ngIf="noContent"> 
+        <div class="card">
+            <div class="textError">
+                <h6 class="card-header">{{errorMessage}}</h6> 
+           </div>    
+        </div>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary" style = "background-color: green; border-color: green;" (click)="asociacion()"  >Asociar</button>                 
+    <br> <br>               
+
+    <div *ngIf="!noContent"> 
+ 
+            <div class = "tablas">
+                <table class = "personas">
+                    <thead >
+                        <tr class = "head">
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue; " (click)="filtrarPersonas(idDomicilio, 1)" >Ordenar por ID</button></th>
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue; " (click)="filtrarPersonas(idDomicilio, 2)" >Ordenar por DNI</button></th>
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue;" (click)="filtrarPersonas(idDomicilio, 3)" >Ordenar por nombre</button></th>
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue;" (click)="filtrarPersonas(idDomicilio, 4)" >Ordenar por apellido</button></th>
+                        </tr>
+                        <tr class = "head">
+                            <th>ID</th>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Desasociación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let persona of personas | paginate: { itemsPerPage: 4, currentPage: pages }">
+                            <th>{{persona.id}} </th>
+                            <th>{{persona.dni}}</th>
+                            <th>{{persona.nombre}} </th>
+                            <th>{{persona.apellido}} </th>                        
+                            <th>                              
+                                <button type="submit" class="btn btn-primary" style = "background-color: red; border-color: red;" (click)="desasociacion(persona.id, idDomicilio)" >Desasociar</button>                                
+                            </th>
+                    
+                    </tbody>
+                
+                </table>
+                <div class="card" align="center" style = "background-color: dodgerblue;">
+                    <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+                </div>
+                <div *ngIf="!loading">
+                    <h6 style ="color:red;">{{errorMessage}} </h6>
+                </div>
+                <div *ngIf="loading">
+                    <h6 style ="color:dodgerblue;">{{message}} </h6>
+                </div>
+
+    </div>
+
+
+</div>

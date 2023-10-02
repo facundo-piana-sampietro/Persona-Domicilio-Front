@@ -1,0 +1,34 @@
+<div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="container">
+        <div class="card-body">
+            <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.controls['username'].errors }" />
+                    <div *ngIf="submitted && form.controls['username'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['username'].errors['required']">Debe ingresar un nombre de usuario</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.controls['password'].errors }" />
+                    <div *ngIf="submitted && form.controls['password'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['password'].errors['required']">Debe ingresar una contraseña</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button  class="btn btn-primary">
+                        Login
+                    </button>
+                    <div class = "textError">
+                        <div *ngIf="logFailed">Usuario o contraseña incorrecta!</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

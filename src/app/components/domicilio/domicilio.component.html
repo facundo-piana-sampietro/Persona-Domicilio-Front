@@ -1,0 +1,142 @@
+<div align = "center">
+    <div class="card">
+        <h4 class="card-header">Domicilios</h4>
+    </div>
+
+    <br> 
+
+    <div *ngIf="!loading"> 
+        <div class="card">
+            <div class="textError">
+                <h6 class="card-header">{{errorMessage}}</h6> 
+           </div>    
+        </div>
+    </div>
+
+
+    <div *ngIf="loading"> 
+        <div *ngIf="!found"> 
+            <div class="textError">No existen domicilios con esas características!</div>
+        </div> 
+
+        <br>  <br>
+
+        <div class = "container">
+
+    
+            <div class = "recuadros">
+                <div id=tablaFiltro>
+                    <div id=cabtab1>
+                    Filtro por ID
+                    </div>
+                    <div id=cuerpotab1>
+                        <br>
+
+                        <form *ngIf="formId" [formGroup]="formId" (ngSubmit)="buscarPorId()">
+                            <input id="busquedaPorID" formControlName="id"  placeholder="Búsqueda por ID" style="text-align:left"   [ngClass]="{ 'is-invalid': submitted && formId.controls['id'].errors }"/> <br> <br>
+                            
+                             <div *ngIf="submitted && formId.controls['id'].errors" class="invalid-feedback">
+                                 <div *ngIf="formId.controls['id'].errors['required']"></div>
+                            </div>
+                            <button type="submit" [disabled]="formId.invalid" class="btn btn-primary" >Filtrar</button>
+                        </form>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div id=tablaFiltro>
+                    <div id=cabtab1>
+                    Filtro por calle y altura
+                    </div>
+                    <div id=cuerpotab1>
+                        <br>
+
+
+                        <form *ngIf="formCalleYAltura" [formGroup]="formCalleYAltura" (ngSubmit)="buscarPorCalleYAltura()">
+                            <input id="busquedaPorCalle" formControlName="calle"  placeholder="Calle" style="text-align:left"   [ngClass]="{ 'is-invalid': submitted && formCalleYAltura.controls['calle'].errors }"/> <br> <br>
+                            
+                             <div *ngIf="submitted && formCalleYAltura.controls['calle'].errors" class="invalid-feedback">
+                                 <div *ngIf="formCalleYAltura.controls['calle'].errors['required']"></div>
+                            </div>
+
+                            <br>
+
+                            <input id="busquedaPorAltura" formControlName="altura"  placeholder="Altura" style="text-align:left"   [ngClass]="{ 'is-invalid': submitted && formCalleYAltura.controls['altura'].errors }"/> <br> <br>
+                            
+                            <div *ngIf="submitted && formCalleYAltura.controls['altura'].errors" class="invalid-feedback">
+                                <div *ngIf="formCalleYAltura.controls['altura'].errors['required']"></div>
+                           </div>
+
+                            <button type="submit" [disabled]="formCalleYAltura.invalid" class="btn btn-primary" >Filtrar</button>
+                        </form>
+
+
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <br>
+
+                <form (ngSubmit)="domiciliosSinPersonas()">
+                    <button type="submit" class="btn btn-primary">Domicilios sin personas</button>   
+                </form>  
+
+                <br>
+
+                <form (ngSubmit)="filtrarTodos(orden)">
+                    <button type="submit" class="btn btn-primary">Quitar Filtros</button>   
+                </form>
+
+            </div>
+
+
+            <div class = "tablas">
+                <table class = "domicilios">
+                    <thead >
+                        <tr class = "head">
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue; " (click)="filtrarTodos(1)" >Ordenar por ID</button></th>
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue; " (click)="filtrarTodos(2)" >Ordenar por calle</button></th>
+                            <th> <button type="submit" class="btn btn-primary" style = "background-color: white; border-color: white; color:dodgerblue;" (click)="filtrarTodos(3)" >Ordenar por altura</button></th>
+                        </tr>
+                        <tr class = "head">
+                            <th>ID</th>
+                            <th>Calle</th>
+                            <th>Altura</th>
+                            <th>Eliminación</th>
+                            <th>Modificación</th>
+                            <th>Personas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let domicilio of domicilios | paginate: { itemsPerPage: 4, currentPage: pages }">
+                            <th>{{domicilio.id}} </th>
+                            <th>{{domicilio.calle}}</th>
+                            <th>{{domicilio.altura}} </th>                        
+                            <th>                              
+                                <button type="submit" class="btn btn-primary" style = "background-color: red; border-color: red; " (click)="eliminarDomicilio(domicilio.id)" >Eliminar</button>                                
+                            </th>
+                            <th>
+                                <button type="submit" class="btn btn-primary" (click)="modificarDomicilio(domicilio.id)">Modificar</button>
+                            </th>
+                            <th>
+                                <button type="submit" class="btn btn-primary" (click)="verPersonas(domicilio.id)">Ver personas</button>
+                            </th>
+                    
+                    </tbody>
+                
+                </table>
+                <div class="card" align="center" style = "background-color: dodgerblue;">
+                    <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+                </div>
+                <div *ngIf="deleted">
+                    <h6 style = "color: red;">Domicilio eliminado correctamente!</h6>
+                </div>
+        
+        </div>
+
+    </div>
+
+
+</div>

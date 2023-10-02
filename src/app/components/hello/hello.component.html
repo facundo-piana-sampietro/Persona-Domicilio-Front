@@ -1,0 +1,31 @@
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+
+<br>
+<div style="text-align:center"> 
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="saludar()">
+    <div class="form-group">    
+        <input type="text" formControlName="name" class="form-control" placeholder="Ingrese un nombre" style="text-align:center" /> 
+    </div>
+    <button  class="btn btn-primary" style="text-align:center">
+        Saludar
+    </button>
+    </form>
+
+    <br>
+    <div class="card">
+        <div *ngIf="loading">
+            <div class="text">
+                <h6 class="card-header">{{name}}</h6> 
+            </div>
+        </div>
+         <div *ngIf="!loading">
+            <div class="textError">
+                 <h6 class="card-header">{{errorMessage}}</h6> 
+            </div>    
+        </div>
+        <br>
+    </div>
+
+</div>
+
+    

@@ -1,0 +1,68 @@
+<div class="header">
+    
+    
+    <div *ngIf="validateUser()">
+        <nav>
+            <ul class="primary-nav">
+                <img src= "https://w7.pngwing.com/pngs/664/842/png-transparent-mover-relocation-transport-paese-di-halloween-furniture-logo-mover.png" class = "left" style="width: 10%;"> <br> <br>
+                <li class="left">
+                    <form (ngSubmit)="personas()">  
+                        <button  class="btn btn-primary">
+                            Personas
+                        </button>
+                    </form>
+                </li>
+
+                <li class="left">
+                    <form (ngSubmit)="crearPersona()">  
+                        <button  class="btn btn-primary">
+                            Crear persona
+                        </button>
+                    </form>
+                </li>
+
+                <li class="left">
+                    <form (ngSubmit)="domicilios()">  
+                        <button  class="btn btn-primary">
+                            Domicilios
+                        </button>
+                    </form>
+                </li>
+
+                <li class="left">
+                    <form (ngSubmit)="crearDomicilio()">  
+                        <button  class="btn btn-primary">
+                            Crear domicilios
+                        </button>
+                    </form>
+                </li>
+
+ 
+
+                <li class="right">
+                    <form (ngSubmit)="logOut()">         
+                            <button  class="btn btn-primary">
+                                Log out
+                            </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>  
+    
+    <div *ngIf="!validateUser()">
+        <nav>
+            <ul class="primary-nav">
+                <img src= "https://th.bing.com/th/id/OIP.qIgALFG5G-grHSc3lIL4YwHaB1?pid=ImgDet&w=650&h=161&rs=1" class = "left" style="width: 10%;"> <br> <br>
+            </ul>
+        </nav>
+    </div>
+
+
+</div>
+ 
+<br>
+  
+
+  
+  

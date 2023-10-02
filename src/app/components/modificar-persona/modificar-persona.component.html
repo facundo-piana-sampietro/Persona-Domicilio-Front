@@ -1,0 +1,59 @@
+<div align = "center">
+    <div class="card">
+        <h4 class="card-header">Modificar persona</h4>
+    </div>
+    <br>
+    <div class="container">
+        <div class="card-body"> 
+            <form *ngIf="form" [formGroup]="form" (ngSubmit)="modificarPersona()">
+             
+             
+                <div class="card">
+                    <h6 class="card-header">ID: {{id}}</h6>
+                </div>
+
+                <br>
+                
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input type="number" ng-model="number" onKeyPress="if(this.value.length>=8) return false;" formControlName="dni" class="form-control"  [ngClass]="{ 'is-invalid': submitted && form.controls['dni'].errors } "  />
+                    <div *ngIf="submitted && form.controls['dni'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['dni'].errors['required']">Debe ingresar un DNI</div>
+                    </div>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.controls['nombre'].errors }"  />
+                    <div *ngIf="submitted && form.controls['nombre'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['nombre'].errors['required']">Debe ingresar un nombre </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" formControlName="apellido" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.controls['apellido'].errors }" />
+                    <div *ngIf="submitted && form.controls['apellido'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['apellido'].errors['required']">Debe ingresar un apellido</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button  class="btn btn-primary" [disabled]="form.invalid">
+                        Modificar persona
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="loading">
+            <h6 style ="color:green;">{{modificado}} </h6>
+        </div>
+        
+        <div *ngIf="!loading">
+            <h6 style ="color:red;">{{errorMessage}} </h6>
+        </div>
+    </div>
+
+</div>

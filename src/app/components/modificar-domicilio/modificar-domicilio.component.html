@@ -1,0 +1,49 @@
+<div align = "center">
+    <div class="card">
+        <h4 class="card-header">Crear domicilio</h4>
+    </div>
+    <br>
+    <div class="container">
+        <div class="card-body"> 
+            <form *ngIf="form" [formGroup]="form" (ngSubmit)="modificarDomicilio()">
+                 
+                <div class="card">
+                    <h6 class="card-header">ID: {{id}}</h6>
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="calle">Calle</label>
+                    <input type="text" formControlName="calle" class="form-control" [ngClass]="{ 'is-invalid': submitted && form.controls['calle'].errors }"  />
+                    <div *ngIf="submitted && form.controls['calle'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['calle'].errors['required']">Debe ingresar una calle</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="altura">Altura</label>
+                    <input type="number" ng-model="number" onKeyPress="if(this.value.length>=5) return false;" formControlName="altura" class="form-control"  [ngClass]="{ 'is-invalid': submitted && form.controls['altura'].errors } "  />
+                    <div *ngIf="submitted && form.controls['altura'].errors" class="invalid-feedback">
+                        <div *ngIf="form.controls['altura'].errors['required']">Debe ingresar una altura</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button  class="btn btn-primary" [disabled]="form.invalid">
+                        Crear domicilio
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="loading">
+            <h6 style ="color:green;">{{modificado}} </h6>
+        </div>
+        
+        <div *ngIf="!loading">
+            <h6 style ="color:red;">{{errorMessage}} </h6>
+        </div>
+    </div>
+
+</div>
+
